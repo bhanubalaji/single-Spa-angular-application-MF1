@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { updateSomeState } from 'shared-state-mylibrary';
 import { State } from 'shared-state-mylibrary';
+import { selectSomeState } from 'shared-state-mylibrary'
 
 
 @Component({
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
   state$: Observable<string>;
 
   constructor(private store: Store<{ app: State }>) {
-    this.state$ = this.store.pipe(select(state => state.app.someState));
+    this.state$ = this.store.pipe(select(selectSomeState))
     
   }
 
