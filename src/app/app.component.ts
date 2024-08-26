@@ -1,4 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { updateSomeState } from 'shared-state-mylibrary';
+import { State } from 'shared-state-mylibrary';
+
 
 @Component({
   selector: 'app-root',
@@ -6,6 +11,13 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  state$: Observable<string>;
+
+  constructor(private store: Store<{ app: State }>) {
+    this.state$ = this.store.pipe(select(state => state.app.someState));
+    
+  }
 
 
   title = 'angular-project-MF1';
@@ -23,8 +35,14 @@ export class AppComponent implements OnInit {
       }
       // Handle the message
     });
+    console.log('state initialized', this.state$);
   }
 
+  updateState() {
+    this.store.dispatch(updateSomeState({ newValue: 'new value' }));
+  }
+
+  
   onButtonClick() {
     // In Angular application 1
     const event = new CustomEvent('app1Event', {

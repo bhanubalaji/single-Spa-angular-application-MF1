@@ -4,6 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppEffects, appReducer, StateModule } from 'shared-state-mylibrary';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({ someFeature: appReducer }), // Ensure consistent feature key
+    EffectsModule.forRoot([AppEffects]), // Ensure effects are registered
+    StateModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
