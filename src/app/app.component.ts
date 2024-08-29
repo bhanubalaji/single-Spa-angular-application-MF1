@@ -14,7 +14,7 @@ import { selectSomeState } from 'shared-state-mylibrary'
 export class AppComponent implements OnInit {
 
   state$: Observable<string>;
-
+  valuecustomBus: any;
   constructor(private store: Store<{ app: State }>) {
     this.state$ = this.store.pipe(select(selectSomeState))
     
@@ -25,17 +25,7 @@ export class AppComponent implements OnInit {
   value: any;
 
   ngOnInit(): void {
-    window.addEventListener('message', (event) => {
-      if (event.origin !== 'http://localhost:9000') {
-        return; // Ignore messages from unexpected origins
-      }
-    
-      const message = event.data?.message;
-      if(message){
-      console.log('Received message:', message);
-      }
-      // Handle the message
-    });
+  
     console.log('state initialized', this.state$);
   }
 
@@ -52,4 +42,10 @@ export class AppComponent implements OnInit {
     window.dispatchEvent(event);
   }
 
+
+  onCustomBusClick() {
+  const target='http://localhost:9000';
+  const message={message: this.valuecustomBus};
+  window.postMessage(message, target);
+  }
 }

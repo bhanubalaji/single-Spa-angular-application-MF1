@@ -229,14 +229,21 @@
       <p>Congratulations! Your app is running. 🎉</p>
       <p>This is a microfrontent project using Angular and Single-Spa</p>
       <div class="inputContainer">
-        check the event trigger btw MF applications
+       1, check the event trigger btw MF applications(using custom event )
         <div class="input-buttonBox">
           <input type="text" [(ngModel)]="value">
           <button (click)="onButtonClick()"  [ngClass]="{'disabled': !value}">Click Event</button>
         </div>
-        <div>state data is:{{ state$ | async }}</div>
-    <button (click)="updateState()">Update State</button>
+        <!-- <div>state data is:{{ state$ | async }}</div>
+    <button (click)="updateState()">Update State</button> -->
+ <br>
+ <br>
 
+ 2,check the event trigger btw MF applications(using Event bus)
+ <div class="input-buttonBox">
+   <input type="text" [(ngModel)]="valuecustomBus">
+   <button (click)="onCustomBusClick()"  [ngClass]="{'disabled': !valuecustomBus}">Click Event</button>
+ </div>
           
       </div>
     </div>
